@@ -1,0 +1,8 @@
+why does it not work without babel
+is this normal
+
+Jest links
+https://jestjs.io/docs/using-matchers
+
+Mock
+https://pawelgrzybek.com/mocking-functions-and-modules-with-jest/#function-mock-using-jestfn

@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@types/jest": "26.0.23",
     "babel": "6.23.0",
     "babel-jest": "27.0.6",
     "jest": "27.0.5",
@@ -15,7 +16,7 @@
     "@babel/preset-env": "7.14.7"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest --watch"
   },
   "keywords": [],
   "author": "",
