@@ -7,10 +7,12 @@ describe('quotes should return correct values', () => {
         mockCheckIfItemInWatchList = jest.fn(() => mockWatchListItems);
     };
 
+    // beforeAll runs before any of the tests are run so the data is set up at the start.
     beforeAll(() => {
         return initialiseMockData();
     });
 
+    // runs after all test completed.
     afterAll(() => {
         mockCheckIfItemInWatchList = null;
     });
@@ -20,6 +22,7 @@ describe('quotes should return correct values', () => {
         expect(mockWatchList().length).toBe(5);
     });
 
+    // This is testing that there is a key value pair of  "key": 2, "symbol": "MSFT" in the mock data
     it('should return return object from array containg specified key and value', () => {
         expect(mockCheckIfItemInWatchList()).toEqual(
             expect.arrayContaining([
@@ -28,6 +31,7 @@ describe('quotes should return correct values', () => {
         );
     });
 
+    // This is testing that there is not a key value pair of  "key": 99, "symbol": "AMZN" in the mock data
     it('should not return object from array containg an invalid key', () => {
         expect(mockCheckIfItemInWatchList()).toEqual(
             expect.arrayContaining([
