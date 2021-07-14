@@ -1,6 +1,7 @@
-import { mockWatchListItems, singleResult } from "../__tests__/fixtures/watchlist_data";
+import { mockWatchListItems } from "../__tests__/fixtures/watchlist_data";
+import { checkIfItemInWatchList, filterArray } from "../scripts/quotes";
 
-describe('quotes should return correct values', () => {
+describe('should return correct values from mockWatchListItems', () => {
     let mockCheckIfItemInWatchList;
 
     const initialiseMockData = () => {
@@ -36,6 +37,27 @@ describe('quotes should return correct values', () => {
         expect(mockCheckIfItemInWatchList()).toEqual(
             expect.arrayContaining([
                 expect.not.objectContaining({ "key": 99, "symbol": "AMZN" },)]
+            )
+        );
+    });
+});
+
+// These tests should test the actual function but with mock data, so we don;t have to rely on a database
+// where the data could change and render the tests useless.
+describe('should return correct values from mockWatchListItems() by passing in mock data', () => {
+    it("should return true", () => {
+        const mockCheckIfItemInWatchList = jest.fn(() => checkIfItemInWatchList("GOOG", mockWatchListItems));
+        expect(mockCheckIfItemInWatchList()).toBe(true);
+    });
+
+    it('should filter the array and return { "key": 1, "symbol": "AMZN" }', () => {
+        const mockFilterArray = jest.fn(() => filterArray(symbol, mockWatchListItems));
+        const symbol = "AMZN";
+        const expected = { "key": 1, "symbol": "AMZN" };
+
+        expect(mockFilterArray(symbol, mockWatchListItems)).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining(expected)]
             )
         );
     });
