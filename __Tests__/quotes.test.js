@@ -3,7 +3,6 @@ import { checkIfItemInWatchList, filterArray, isItemInDatabase } from "../script
 
 let mockCheckIfItemInWatchList;
 
-
 describe('should return correct values from mockWatchListItems', () => {
     // beforeAll runs before any of the tests are run so the data is set up at the start.
     beforeAll(() => {
@@ -64,18 +63,34 @@ describe('checkIfItemInWatchList', () => {
     });
 });
 
-describe('', () => {
+describe('isItemInDatabase function should return correct values', () => {
+    let fetchAllItemsFromDatabaseFunction;
+
+    beforeAll(() => {
+        // the result of this is a function that contains a list of objects
+        fetchAllItemsFromDatabaseFunction = () => {
+            return jest.fn(() => mockWatchListItems)();
+        };
+    });
+
+    afterAll(() => {
+        fetchAllItemsFromDatabaseFunction = null;
+    });
+
     it('should return { "key": 1, "symbol": "AMZN" }', () => {
         // test isItemInDatabase by mocking second parameter (fetchAllItemsFromDatabaseFunction)
         // fetchAllItemsFromDatabaseFunction is mocked to be mockWatchListItems, an array of objects
 
-        // the result of this is a function that contains a list of objects
-        const fetchAllItemsFromDatabaseFunction = () => {
-            return jest.fn(() => mockWatchListItems)();
-        };
         const searchItem = "AMZN";
         const expected = { "key": 1, "symbol": "AMZN" };
         const mockFetchAllItemsFromDatabaseFunction = isItemInDatabase(searchItem, fetchAllItemsFromDatabaseFunction);
-        expect(mockFetchAllItemsFromDatabaseFunction).toEqual(expected);
+        expect(mockFetchAllItemsFromDatabaseFunction).toStrictEqual(expected);
     });
+
+    it('should not return a strict match due to lowercase symbol used', () => {
+        const searchItem = "AMZN";
+        const expected = { "key": 1, "symbol": "Amzn" };
+        const mockFetchAllItemsFromDatabaseFunction = isItemInDatabase(searchItem, fetchAllItemsFromDatabaseFunction);
+        expect(mockFetchAllItemsFromDatabaseFunction).not.toStrictEqual(expected);
+    })
 });
