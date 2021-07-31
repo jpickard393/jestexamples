@@ -51,9 +51,6 @@ describe('checkIfItemInWatchList', () => {
         expect(result).toBe(true);
     });
 
-
-    // also do failing test
-
     it('should filter the array and return { "key": 1, "symbol": "AMZN" }', () => {
         const mockFilterArray = jest.fn(() => filterArray(symbol, mockWatchListItems));
         const symbol = "AMZN";
@@ -72,9 +69,9 @@ describe('', () => {
         // test isItemInDatabase by mocking second parameter (fetchAllItemsFromDatabaseFunction)
         // fetchAllItemsFromDatabaseFunction is mocked to be mockWatchListItems, an array of objects
 
+        // the result of this is a function that contains a list of objects
         const fetchAllItemsFromDatabaseFunction = () => {
-            const result = jest.fn(() => mockWatchListItems);
-            return result();
+            return jest.fn(() => mockWatchListItems)();
         };
         const searchItem = "AMZN";
         const expected = { "key": 1, "symbol": "AMZN" };
