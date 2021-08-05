@@ -12,6 +12,7 @@ export const filterArray = (symbol, watchListItems) => {
 const fetchAllItemsFromDatabase = () => {
     // this would return a list of items from the database,
     // but for this example we will not bother connecting to a database
+    // this will be mocked from the tests
 
 };
 
